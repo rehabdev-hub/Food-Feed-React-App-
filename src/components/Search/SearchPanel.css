@@ -1,0 +1,85 @@
+/* container anchored under the navbar search box */
+.search-popover{
+  position: absolute;
+  top: 60px;              /* align under your navbar input */
+  left: 50%;
+  transform: translateX(-50%);
+  width: min(720px, 92vw);
+  background: #fff;
+  border: 1px solid #e5e7eb;
+  border-radius: 14px;
+  box-shadow: 0 20px 40px rgba(0,0,0,.12);
+  padding: 12px;
+  z-index: 60;
+}
+
+.search-row{
+  display:flex; align-items:center; gap:10px;
+  background:#f7f7f9; border-radius: 999px; padding: 8px 10px;
+}
+.s-icon{ color:#6b7280; font-size: 16px; margin-left: 6px; }
+.s-input{
+  flex:1; border:0; outline:0; background:transparent;
+  font-size: 14px; padding: 6px;
+}
+.s-go{
+  border:0; background:#6c5ce7; color:#fff;
+  padding:8px 12px; border-radius: 999px; font-weight:600; cursor:pointer;
+}
+
+.s-sections{ margin-top: 10px; }
+.s-head{
+  display:flex; align-items:center; justify-content:space-between;
+  font-weight:700; color:#374151; padding: 6px 2px;
+}
+.s-clear{
+  border:0; background:transparent; color:#6b7280; cursor:pointer;
+}
+.s-empty{ color:#9ca3af; padding: 8px 2px; }
+
+.recent-list{ list-style:none; margin:0; padding:0; }
+.recent-user{
+  display:flex; align-items:center; gap:10px;
+  background:#f9fafb; padding:8px; border-radius:12px; cursor:pointer;
+}
+.recent-user:hover{ background:#f3f4f6; }
+.recent-avatar{
+  width:36px; height:36px; border-radius:999px; background:#ddd;
+  display:flex; align-items:center; justify-content:center; font-weight:700;
+}
+.recent-meta .recent-title{ font-weight:700; }
+.recent-meta .recent-sub{ color:#9ca3af; font-size:12px; }
+
+.recent-chip{
+  display:inline-block; margin:8px 8px 0 0;
+  background:#eef2ff; color:#4338ca; padding:6px 10px; border-radius:999px;
+  cursor:pointer; font-size:12px; font-weight:600;
+}
+
+.user-list{ list-style:none; margin:6px 0 0; padding:0; }
+.user-row{
+  display:flex; align-items:center; gap:10px; padding:8px; border-radius:12px;
+  cursor:pointer;
+}
+.user-row:hover{ background:#f7f7f9; }
+.user-avatar{ width:40px; height:40px; border-radius:999px; object-fit:cover; }
+.user-meta{ min-width:0; }
+.user-name{ font-weight:700; }
+.user-handle{ color:#9ca3af; font-size:12px; }
+.user-caret{ margin-left:auto; color:#9ca3af; font-size:18px; }
+
+.dish-grid{
+  display:grid; grid-template-columns: repeat(4, 1fr);
+  gap:8px; margin-top:6px;
+}
+.dish-card{ display:block; border-radius:10px; overflow:hidden; border:1px solid #eee; }
+.dish-card img{ width:100%; height:70px; object-fit:cover; display:block; }
+@media (max-width:560px){
+  .dish-grid{ grid-template-columns: repeat(3, 1fr); }
+}
+img.recent-avatar-img {
+    width: 40px;
+    height: 40px;
+    border-radius: 50px;
+    object-fit: cover;
+}

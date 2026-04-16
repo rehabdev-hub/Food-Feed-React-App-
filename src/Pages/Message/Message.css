@@ -1,0 +1,108 @@
+.contact-page {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 40px 20px;
+    font-family: Arial, sans-serif;
+    color: #333;
+  }
+  
+  .contact-header {
+    text-align: center;
+    margin-bottom: 40px;
+  }
+  .contact-header h1 {
+    font-size: 36px;
+    margin-bottom: 10px;
+    color: #222;
+  }
+  .contact-header p {
+    font-size: 18px;
+    color: #555;
+  }
+  
+  .contact-wrapper {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 30px;
+  }
+  
+  .contact-info {
+    background: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+  }
+  .contact-info h2 {
+    margin-bottom: 15px;
+    color: red;
+  }
+  .contact-info ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  .contact-info ul li {
+    margin-bottom: 12px;
+    font-size: 16px;
+  }
+  
+  .map {
+    margin-top: 20px;
+    border-radius: 8px;
+    overflow: hidden;
+  }
+  
+  .contact-form {
+    background: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+  }
+  .contact-form h2 {
+    margin-bottom: 15px;
+    color: red;
+  }
+  .contact-form form {
+    display: flex;
+    flex-direction: column;
+  }
+  .contact-form label {
+    margin-bottom: 5px;
+    font-weight: 500;
+  }
+  .contact-form input,
+  .contact-form textarea {
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-size: 15px;
+    transition: border-color 0.3s, box-shadow 0.3s;
+  }
+  .contact-form input:focus,
+  .contact-form textarea:focus {
+    border-color: red;
+    outline: none;
+    box-shadow: 0 0 6px rgba(255,0,0,0.2);
+  }
+  .contact-form button {
+    background: red;
+    color: #fff;
+    padding: 12px;
+    border: none;
+    border-radius: 6px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background 0.3s;
+  }
+  .contact-form button:hover {
+    background: darkred;
+  }
+  
+  @media (max-width: 768px) {
+    .contact-wrapper {
+      grid-template-columns: 1fr;
+    }
+  }
+  
