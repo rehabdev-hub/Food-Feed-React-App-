@@ -97,9 +97,9 @@ function Login() {
   return (
     <div className="auth-page">
       <div className="auth-card">
-        <h2>Welcome to FSF</h2>
+        <h2>Welcome to Foodiya</h2>
         <p>
-          Login to continue to <b>FSF</b>
+          Login to continue to <b>Foodiya App</b>
         </p>
 
         {error && <p className="error">{error}</p>}
