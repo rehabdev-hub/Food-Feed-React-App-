@@ -97,7 +97,7 @@ function Login() {
   return (
     <div className="auth-page">
       <div className="auth-card">
-        <h2>Welcome Back</h2>
+        <h2>Welcome to Food Social Feed App</h2>
         <p>
           Login to continue to <b>Food Feed</b>
         </p>
