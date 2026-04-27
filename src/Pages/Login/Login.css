@@ -213,7 +213,7 @@
   letter-spacing: 0.5px;
   transition: all 0.3s ease;
 }
-.input-group select .drop-list{
+.input-group select option{
     color: #333; 
   font-family: "Poppins";
   font-size: 12px;
@@ -223,3 +223,4 @@
   border-radius: 10px;
   padding: 18px 15px;
 }
+

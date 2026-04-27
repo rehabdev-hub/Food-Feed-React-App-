@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import { FaEnvelope, FaLock } from "react-icons/fa";
 import supabase from "../../supabaseClient"; // ⬅️ Supabase client
 import "./Login.css";
@@ -147,7 +147,7 @@ function Login() {
             {resetBusy ? "Sending…" : "Forgot Password?"}
           </button>
           <p>
-            Don’t have an account? <a href="/register">Register</a>
+            Don’t have an account? <Link to="/register">Register</Link>
           </p>
         </div>
       </div>
