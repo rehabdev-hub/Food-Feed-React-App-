@@ -462,6 +462,9 @@
   
   .suggest-info {
     flex: 1;
+    gap: 2px;
+    display: flex;
+    flex-direction: column;
   }
   
   .suggest-info .name {
@@ -470,10 +473,24 @@
   }
   
   .suggest-info small {
-    font-size: 12px;
+    font-size: 10px;
     color: #777;
   }
-  .follow-btn {
+  .suggest-info .follow-btn {
+    padding: 6px 14px;
+    border: 1px solid #0a66c2;
+    background: transparent;
+    color: #0a66c2;
+    border-radius: 25px;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-family: "Poppins";
+    line-height: 15px;
+    width: fit-content !important;
+}
+ .follow-btn {
     padding: 6px 14px;
     border: 1px solid #0a66c2;
     background: transparent;
