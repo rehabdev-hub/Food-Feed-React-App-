@@ -2,13 +2,14 @@ import { useEffect, useMemo, useRef, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { useAuth } from "../../context/AuthContext";
 import {
-  FaHome,
+ FaHome,
+  FaSearch,
+  FaHandshake,
   FaCommentDots,
   FaBell,
-  FaSignOutAlt,
   FaUser,
-  FaCaretDown,
-  FaHandshake,
+  FaSignOutAlt,
+  FaBars
 } from "react-icons/fa";
 import supabase from "../../supabaseClient";
 import "../Search/SearchPanel.css";
@@ -23,6 +24,7 @@ function Navigation() {
 
   const [showMenu, setShowMenu] = useState(false);
   const [searchOpen, setSearchOpen] = useState(false);
+  const [expanded, setExpanded] = useState(false);
 
   const menuRef = useRef(null);
   const triggerRef = useRef(null);
@@ -304,116 +306,82 @@ function Navigation() {
     user?.user_metadata?.avatar_url ||
     "https://placehold.co/40x40?text=U";
 
-  return (
-    <nav className="navbar">
-      {/* Make wrapper relative so the popover can anchor */}
-      <div className="navbar-wrapper container" style={{ position: "relative" }}>
-        {/* Logo */}
-        <div className="logo">
-          <h1>Foodiya</h1>
-        </div>
+return (
+  <div className={`navsidebar ${expanded ? "expanded" : ""}`}>
 
-        {/* Search Bar (opens our popover) */}
-        <div className="search-bar">
-          <input
-            type="text"
-            placeholder="Search…"
-            readOnly
-            onFocus={() => setSearchOpen(true)}
-            onClick={() => setSearchOpen(true)}
-          />
-        </div>
+    {/* TOP */}
+    <div className="sidebar-top">
+      <div className="logo">F</div>
 
-        {/* Main Menu */}
-        <div className="main-menu">
-          <ul>
-            <li>
-              <Link to="/" className="nav-link">
-                <FaHome /> Home
-              </Link>
-            </li>
-
-            <li className="notif-link">
-              <Link to="/Recommendations" className="nav-link">
-                <FaHandshake /> Find Vendors
-              </Link>
-            </li>
-
-
-            <li className="notif-link">
-              <Link to="/messages" className="nav-link">
-                <FaCommentDots /> Messaging
-              </Link>
-              {msgUnread > 0 && <span className="badge">{msgUnread}</span>}
-            </li>
-
-            <li className="notif-link">
-              <Link to="/Notification" className="nav-link">
-                <FaBell /> Notifications
-              </Link>
-              {notifUnread > 0 && <span className="badge">{notifUnread}</span>}
-            </li>
-
-            {/* Profile Dropdown */}
-            <li className="profile-menu" ref={menuRef}>
-              <button
-                ref={triggerRef}
-                className="profile-trigger"
-                onClick={() => setShowMenu((s) => !s)}
-                aria-haspopup="menu"
-                aria-expanded={showMenu}
-              >
-                <img
-                  src={avatar}
-                  alt="Profile"
-                  className="avatar"
-                  onError={(e) => (e.currentTarget.src = "https://placehold.co/40x40?text=U")}
-                />
-                <span className="pro-name">
-                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M11.9999 13.1714L16.9497 8.22168L18.3639 9.63589L11.9999 15.9999L5.63599 9.63589L7.0502 8.22168L11.9999 13.1714Z"></path></svg>
-                </span>
-              </button>
-
-              {showMenu && (
-                <div className="profile-dropdown" role="menu">
-                  {/* Entire header navigates to profile */}
-                  <Link
-                    to="/profile"
-                    className="profile-top"
-                    onClick={() => setShowMenu(false)}
-                    title="View Profile"
-                  >
-                    <img
-                      src={avatar}
-                      alt="User"
-                      className="avatar-lg"
-                      onError={(e) => (e.currentTarget.src = "https://placehold.co/40x40?text=U")}
-                    />
-                    <div>
-                      <h4>{displayName}</h4>
-                      <p>{user?.email || "No email found"}</p>
-                    </div>
-                  </Link>
-
-                  <div className="dropdown-links">
-                    <Link to="/profile" className="dropdown-item" onClick={() => setShowMenu(false)}>
-                      <FaUser /> View Profile
-                    </Link>
-                    <button onClick={handleLogout} className="dropdown-item logout">
-                      <FaSignOutAlt /> Sign Out
-                    </button>
-                  </div>
-                </div>
-              )}
-            </li>
-          </ul>
-        </div>
-
-        {/* Search popover panel */}
-        <SearchPanel open={searchOpen} onClose={() => setSearchOpen(false)} />
+      <div className="icon-item" onClick={() => setSearchOpen(true)}>
+        <FaSearch />
+        <span className="tooltip">Search</span>
       </div>
-    </nav>
-  );
+    </div>
+
+    {/* MENU */}
+    <div className="sidebar-menu">
+
+      <Link to="/" className="icon-item">
+        <FaHome />
+        <span className="label">Home</span>
+        <span className="tooltip">Home</span>
+      </Link>
+
+      <Link to="/Recommendations" className="icon-item">
+        <FaHandshake />
+        <span className="label">Find Vendors</span>
+        <span className="tooltip">Find Vendors</span>
+      </Link>
+
+      <Link to="/messages" className="icon-item">
+        <FaCommentDots />
+        {msgUnread > 0 && <span className="badge">{msgUnread}</span>}
+        <span className="label">Messages</span>
+        <span className="tooltip">Messages</span>
+      </Link>
+
+      <Link to="/Notification" className="icon-item">
+        <FaBell />
+        {notifUnread > 0 && <span className="badge">{notifUnread}</span>}
+        <span className="label">Notifications</span>
+        <span className="tooltip">Notifications</span>
+      </Link>
+
+    </div>
+
+    {/* PROFILE */}
+    <div className="sidebar-bottom">
+
+      <div className="icon-item profile-trigger" onClick={() => setShowMenu(!showMenu)}>
+        <img src={avatar} className="avatar" />
+        <span className="label">{displayName}</span>
+        <span className="tooltip">Profile</span>
+      </div>
+
+      {showMenu && (
+        <div className="profile-dropdown">
+          <Link to="/profile" className="dropdown-item">
+            <FaUser /> Profile
+          </Link>
+          <button onClick={handleLogout} className="dropdown-item logout">
+            <FaSignOutAlt /> Logout
+          </button>
+        </div>
+      )}
+
+
+    {/* TOGGLE */}
+    <div className="icon-item sidebar-toggle">
+      <FaBars />  <span className="tooltip">More</span>
+    </div>
+    </div>
+
+
+
+    <SearchPanel open={searchOpen} onClose={() => setSearchOpen(false)} />
+  </div>
+);
 }
 
 export default Navigation;

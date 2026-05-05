@@ -65,7 +65,6 @@ function App() {
               </ProtectedRoute>} />
           <Route path="/Login" element={<Login />} />
           <Route path="/Register" element={<Register />} />
-           <Route path="/Filter" element={<Filter />} />
           <Route path="/Recommendations" element={
             <ProtectedRoute>
               <Navigation />

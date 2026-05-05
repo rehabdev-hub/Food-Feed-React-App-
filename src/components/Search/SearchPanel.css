@@ -1,16 +1,15 @@
 /* container anchored under the navbar search box */
 .search-popover{
-  position: absolute;
-  top: 60px;              /* align under your navbar input */
-  left: 50%;
-  transform: translateX(-50%);
-  width: min(720px, 92vw);
-  background: #fff;
-  border: 1px solid #e5e7eb;
-  border-radius: 14px;
-  box-shadow: 0 20px 40px rgba(0,0,0,.12);
-  padding: 12px;
-  z-index: 60;
+    position: absolute;
+    top: 89px;
+    left: 118%;
+    width: min(365px, 40vw);
+    background: #fff;
+    border: 1px solid #e5e7eb;
+    border-radius: 14px;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, .12);
+    padding: 12px;
+    z-index: 60;
 }
 
 .search-row{

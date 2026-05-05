@@ -225,7 +225,7 @@ export default function SearchPanel({ open, onClose }) {
         />
         <button className="s-go" onClick={submitQuery}>Go</button>
       </div>
-
+{(recents.length > 0 || users.length > 0 || loading) && (
       <div className="s-sections">
         {/* Recent searches */}
         <div className="s-head">
@@ -299,6 +299,7 @@ export default function SearchPanel({ open, onClose }) {
           </ul>
         )}
       </div>
+       )}
     </div>
   );
 }

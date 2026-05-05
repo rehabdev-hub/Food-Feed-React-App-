@@ -3,7 +3,6 @@ import React, { useEffect, useMemo, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import "./Home.css";
 
-// import Filter from "../../components/Filter/Filter";
 import CreatePost from "../../components/CreatePost";
 import Feed from "../../components/Feed";
 
@@ -275,7 +274,7 @@ function Home() {
       <aside className="right right-side-panel">
 
         <div className="suggest-card add-feed">
-          <h4>Add to your feed</h4>
+          <h4>Suggested for you</h4>
 
           {loadingSug && (
             <p style={{ padding: 8, color: "#6b7280" }}>Loading…</p>

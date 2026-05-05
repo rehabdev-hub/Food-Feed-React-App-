@@ -241,24 +241,7 @@ function Notification() {
           <h3>{loadingProfile ? "Loading…" : myProfile.full_name || "User"}</h3>
           <p>{myProfile.bio || "Food Enthusiast | Recipe Creator"}</p>
 
-          <div className="profile-stats">
-            <div title="Post count">
-              <FaEye /> <p>Posts</p>
-              <b>{postCount}</b>
-            </div>
-            <div title="Sum of likes across your posts">
-              <FaChartBar /> <p>Post Impressions</p>
-              <b>{postImpressions}</b>
-            </div>
-          </div>
-
-          <div className="profile-progress">
-            <p>Profile Strength</p>
-            <div className="progress-bar">
-              <span style={{ width: "70%" }} />
-            </div>
-          </div>
-
+          {/* 👉 Replaced two buttons with a single "View Profile" */}
           <div className="quick-actions" style={{ display: "flex", gap: 8 }}>
             <button type="button" className="follow-btn" onClick={goToMyProfile}>
               View Profile
@@ -267,7 +250,6 @@ function Notification() {
         </div>
 
       </aside>
-
       {/* MAIN FEED */}
       <main className="feed">
         <Notify />
@@ -275,18 +257,9 @@ function Notification() {
 
       {/* RIGHT SIDEBAR */}
       <aside className="right right-side-panel">
-        <div className="suggest-card">
-          <h4>Sponsored Deals</h4>
-          <ul className="trending-list">
-            <li>🍕 Pizza Supreme</li>
-            <li>🍩 Strawberry Donuts</li>
-            <li>🥗 Vegan Salad</li>
-            <li>🍔 Cheese Burger</li>
-          </ul>
-        </div>
 
         <div className="suggest-card add-feed">
-          <h4>Add to your feed</h4>
+          <h4>Suggested for you</h4>
 
           {loadingSug && <p style={{ padding: 8, color: "#6b7280" }}>Loading…</p>}
           {!loadingSug && suggestions.length === 0 && (

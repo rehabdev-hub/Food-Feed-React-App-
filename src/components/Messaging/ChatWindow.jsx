@@ -209,7 +209,7 @@ export default function ChatWindow({ me, conversationId, onAnyRead }) {
       )}
 
       <style>{`
-        .chat{display:flex;flex-direction:column;height:750px}
+        .chat{display:flex;flex-direction:column;height:75vh}
         .messages{flex:1;overflow:auto;padding:12px 16px;background:#fafafa}
         .empty{padding:20px;color:#6b7280}
         .loading{padding:10px;text-align:center;color:#6b7280}
