@@ -6,7 +6,6 @@ import { useAuth } from "../../context/AuthContext";
 import supabase from "../../supabaseClient";
 
 import Notify from "../../components/Notify";
-import Filter from "../../components/Filter/Filter";
 
 import { FaEye, FaChartBar } from "react-icons/fa";
 
@@ -267,7 +266,6 @@ function Notification() {
           </div>
         </div>
 
-        <Filter />
       </aside>
 
       {/* MAIN FEED */}
