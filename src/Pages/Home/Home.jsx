@@ -4,7 +4,6 @@ import { Link, useNavigate } from "react-router-dom";
 import "./Home.css";
 
 // import Filter from "../../components/Filter/Filter";
-import Filter from "../../components/Filter/Filter";
 import CreatePost from "../../components/CreatePost";
 import Feed from "../../components/Feed";
 
@@ -262,7 +261,6 @@ function Home() {
           </div>
         </div>
 
-        <Filter />
       </aside>
 
       {/* MAIN FEED */}

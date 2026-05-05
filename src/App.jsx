@@ -9,7 +9,6 @@ import Notification from "./Pages/Notification/Notification";
 import { Login } from './Pages/Login/Login';
 import { Register } from './Pages/Register/Register';
 import Navigation from './components/Navigation/Navigation';
-import Filter from './components/Filter/Filter';
 import { AuthProvider } from "./context/AuthContext";
 import ProtectedRoute from './routes/ProtectedRoute';
 import  Messages  from "./Pages/Message/Message";
