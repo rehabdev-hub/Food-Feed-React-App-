@@ -122,10 +122,66 @@ export default function MessageInput({ me, conversationId, onSent }) {
       <button onClick={send} disabled={busy}>Send</button>
 
       <style>{`
-        .input-wrap{display:flex; gap:8px; padding:10px; border-top:1px solid #eee; background:#fff}
-        .text{flex:1;border:1px solid #e5e7eb;border-radius:5px;padding:5px 12px;font-size:12px;white-space:pre-wrap;line-height:1.45}
-        button{background:#0a66c2; color:#fff; border:0; border-radius:10px; padding:0 16px}
-        button:disabled{opacity:.6}
+     @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500&display=swap');
+
+  .input-wrap {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px 16px;
+    background: #ffffff;
+    border-top: 1px solid #efefef;
+    font-family: 'Inter', -apple-system, sans-serif;
+  }
+
+  .text {
+    flex: 1;
+    border: 1px solid #dbdbdb;
+    border-radius: 22px;
+    padding: 10px 18px;
+    font-size: 14px;
+    background: #fafafa;
+    transition: border 0.2s ease-in-out;
+    outline: none; /* Focus outline removed */
+  }
+
+  .text:focus {
+    border-color: #a8a8a8;
+  }
+
+  .icon-btn {
+    cursor: pointer;
+    color: #262626;
+    display: flex;
+    align-items: center;
+    transition: opacity 0.2s;
+  }
+
+  .icon-btn:hover {
+    opacity: 0.7;
+  }
+
+  button {
+    background: transparent;
+    color: #0095f6;
+    border: 0;
+    font-weight: 600;
+    font-size: 14px;
+    cursor: pointer;
+    padding: 4px 8px;
+    transition: color 0.2s ease;
+    outline: none;
+  }
+
+  button:hover {
+    color: #00376b;
+  }
+
+  button:disabled {
+    opacity: 0.3;
+    cursor: default;
+  }
+       
       `}</style>
     </div>
   );

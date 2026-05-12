@@ -283,7 +283,7 @@ export default function CreatePost() {
   // Seller → full composer
   return (
     <div className="create-post">
-              <h2 className="create-post-title">Stories</h2>
+              {/* <h2 className="create-post-title">Stories</h2> */}
       {/* Stories bar appears above the composer */}
       <StoriesBar me={me} />
 
@@ -398,7 +398,7 @@ export default function CreatePost() {
               <div className="create-actions" style={{ marginTop: 12, display: "flex", alignItems: "center" }}>
                 <label className="cp-file" style={{ cursor: "pointer" }}>
                   <input type="file" accept="image/*,video/*" onChange={onPick} hidden />
-                  📷/🎥 Media
+                  Media
                 </label>
 
                 <div className="cp-spacer" style={{ flex: 1 }} />

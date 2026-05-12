@@ -25,22 +25,13 @@
     position: sticky;
     top: 50px;
 }
-  .filters-card,
-  .suggest-card {
-    background: #fff;
-    border-radius: 12px;
-    padding: 15px;
-    box-shadow: 0 3px 8px rgba(0,0,0,0.1);
-  }
   
-  .filters-card ul,
   .suggest-card ul {
     list-style: none;
     padding: 0;
     margin: 0;
   }
   
-  .filters-card ul li,
   .suggest-card ul li {
     padding: 6px 0;
     font-size: 14px;
@@ -414,13 +405,6 @@
     align-items: center;
     gap: 10px;
    }
-.suggest-card {
-    background: #fff;
-    border-radius: 12px;
-    padding: 15px;
-    box-shadow: 0 2px 6px rgba(0,0,0,0.08);
-    margin-bottom: 20px;
-  }
   
   .suggest-card h4 {
     margin-bottom: 15px;
@@ -462,12 +446,14 @@
     object-fit: cover;
   }
   
-  .suggest-info {
+ .suggest-info {
     flex: 1;
     gap: 2px;
     display: flex;
-    flex-direction: column;
-  }
+    flex-direction: unset;
+    justify-content: space-between;
+    align-items: center;
+}
   
   .suggest-info .name {
     font-weight: 600;
@@ -479,8 +465,6 @@
     color: #777;
   }
   .suggest-info .follow-btn {
-    padding: 6px 14px;
-    border: 1px solid #0a66c2;
     background: transparent;
     color: #0a66c2;
     border-radius: 25px;
@@ -525,13 +509,6 @@
     text-decoration: underline;
   }
 
-.suggest-card {
-  background: #fff;
-  border-radius: 12px;
-  padding: 15px;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.08);
-  margin-bottom: 20px;
-}
 
 .suggest-card h4 {
   margin-bottom: 15px;
@@ -604,13 +581,17 @@
     color: #124FF8;
     text-decoration: none;
 }
+.suggest-content {
+    display: flex;
+    flex-direction: column;
+}
 .footer {
-    padding: 20px;
+    padding-block: 20px;
     background: #f5f5f3;
     font-size: 11px;
     color: #666;
     border-top: 1px solid #ddd;
-    margin-top: 30px;
+    margin-top: 0px;
     line-height: 5px;
 
   }

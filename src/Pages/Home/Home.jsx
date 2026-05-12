@@ -308,6 +308,7 @@ function Home() {
                 onError={(e) => (e.currentTarget.src = fallbackAvatar)}
               />
               <div className="suggest-info">
+                <div className="suggest-content">
                 <p
                   className="name"
                   onClick={(e) => {
@@ -318,7 +319,9 @@ function Home() {
                 >
                   {s.full_name}
                 </p>
-                <small>{s.bio}</small>
+                <small>Suggested for you</small>
+                {/* <small>{s.bio}</small> */}
+                </div>
 
                 {/* Follow button should NOT trigger navigation */}
                 <button

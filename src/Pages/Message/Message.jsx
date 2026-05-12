@@ -51,9 +51,6 @@ export default function Messages() {
             <button className="chip active">Focused</button>
           </div>
         </div>
-        <div className="right">
-          <input className="search" placeholder="Search messages" />
-        </div>
       </div>
 
       {/* Main two-pane layout (height only within page, header remains clickable) */}
