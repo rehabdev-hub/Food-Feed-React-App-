@@ -261,7 +261,9 @@ function Notification() {
         <div className="suggest-card add-feed">
           <h4>Suggested for you</h4>
 
-          {loadingSug && <p style={{ padding: 8, color: "#6b7280" }}>Loading…</p>}
+          {loadingSug && (
+            <p style={{ padding: 8, color: "#6b7280" }}>Loading…</p>
+          )}
           {!loadingSug && suggestions.length === 0 && (
             <p style={{ padding: 8, color: "#6b7280" }}>
               No new people to follow right now.
@@ -291,6 +293,7 @@ function Notification() {
                 onError={(e) => (e.currentTarget.src = fallbackAvatar)}
               />
               <div className="suggest-info">
+                <div className="suggest-content">
                 <p
                   className="name"
                   onClick={(e) => {
@@ -301,7 +304,9 @@ function Notification() {
                 >
                   {s.full_name}
                 </p>
-                <small>{s.bio}</small>
+                <small>Suggested for you</small>
+                {/* <small>{s.bio}</small> */}
+                </div>
 
                 {/* Follow button should NOT trigger navigation */}
                 <button
@@ -318,22 +323,22 @@ function Notification() {
             </div>
           ))}
 
-          <Link to="/discover" className="view-all">
-            View all recommendations →
-          </Link>
+           <Link to="/recommendations" className="recom-link">
+                           View all recommendations →
+                        </Link>
         </div>
 
         <footer className="footer">
           <div className="footer-links">
-            <Link to="/about">About</Link>
-            <Link to="/accessibility">Accessibility</Link>
-            <Link to="/help">Help Center</Link>
-            <Link to="/privacy">Privacy & Terms</Link>
-            <Link to="/ads">Ad Choices</Link>
-            <Link to="/advertising">Advertising</Link>
-            <Link to="/business">Business Services</Link>
-            <Link to="/apps">Get the App</Link>
-            <Link to="/more">More</Link>
+            <a href="#">About</a>
+            <a href="#">Accessibility</a>
+            <a href="#">Help Center</a>
+            <a href="#">Privacy & Terms</a>
+            <a href="#">Ad Choices</a>
+            <a href="#">Advertising</a>
+            <a href="#">Business Services</a>
+            <a href="#">Get the App</a>
+            <a href="#">More</a>
           </div>
 
           <div className="footer-bottom">

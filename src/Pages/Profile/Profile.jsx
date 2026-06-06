@@ -835,8 +835,8 @@ function Profile() {
                 <div className="overlay">
                   <div className="overlay-actions">
                     <button onClick={(e) => e.stopPropagation()}><FaHeart /> {item.like_count || 0}</button>
-                    <button onClick={(e) => e.stopPropagation()}><FaEye /> {item.comment_count || 0}</button>
-                    <button onClick={(e) => e.stopPropagation()}><FaShareAlt /></button>
+                    {/* <button onClick={(e) => e.stopPropagation()}><FaEye /> {item.comment_count || 0}</button> */}
+                    {/* <button onClick={(e) => e.stopPropagation()}><FaShareAlt /></button> */}
                   </div>
                 </div>
               </div>

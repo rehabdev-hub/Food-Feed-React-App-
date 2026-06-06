@@ -8,6 +8,7 @@ import { v4 as uuid } from "uuid";
 const AVATAR_BUCKET = "avatars";
 const STORY_BUCKET  = "stories";
 
+
 const MAX_VISIBLE  = 5;
 const CARD_W       = 115;
 const GAP          = 10;
@@ -49,25 +50,31 @@ const PLACEHOLDER_STORIES = [
     id: "ph1",
     name: "Sophia",
     avatar: "https://i.pravatar.cc/100?img=47",
-    bg: "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=300&h=500&fit=crop",
+    bg: "https://plus.unsplash.com/premium_photo-1683619761468-b06992704398?fm=jpg&q=60&w=3000&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8ZmFzdGZvb2R8ZW58MHx8MHx8fDA%3D",
   },
   {
     id: "ph2",
     name: "Marcus",
     avatar: "https://i.pravatar.cc/100?img=68",
-    bg: "https://images.unsplash.com/photo-1519681393784-d120267933ba?w=300&h=500&fit=crop",
+    bg: "https://images.unsplash.com/photo-1517434324-1db605ff03c7?fm=jpg&q=60&w=3000&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTJ8fGZhc3QlMjBmb29kfGVufDB8fDB8fHww",
   },
   {
     id: "ph3",
     name: "Ayla",
     avatar: "https://i.pravatar.cc/100?img=25",
-    bg: "https://images.unsplash.com/photo-1501854140801-50d01698950b?w=300&h=500&fit=crop",
+    bg: "https://thumbs.dreamstime.com/b/fast-food-real-image-photo-design-etc-377817747.jpg",
   },
   {
     id: "ph4",
     name: "Jordan",
     avatar: "https://i.pravatar.cc/100?img=60",
-    bg: "https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?w=300&h=500&fit=crop",
+    bg: "https://images.unsplash.com/photo-1763689389824-dd2cea2e5772?fm=jpg&q=60&w=3000&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+  },
+  {
+    id: "ph5",
+    name: "Ali",
+    avatar: "https://i.pravatar.cc/100?img=60",
+    bg: "https://images.unsplash.com/photo-1763689389824-dd2cea2e5772?fm=jpg&q=60&w=3000&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
   },
 ];
 
@@ -83,6 +90,7 @@ export default function StoriesBar({ me }) {
 
   const [canScrollLeft,  setCanScrollLeft]  = useState(false);
   const [canScrollRight, setCanScrollRight] = useState(false);
+  const [deletingStory, setDeletingStory] = useState(false);
 
   const scrollerRef = useRef(null);
   const fileRef     = useRef(null);
@@ -242,6 +250,69 @@ export default function StoriesBar({ me }) {
     }
   };
 
+
+  const deleteMyStory = async () => {
+  if (!viewer?.user?.story_id || !me?.id) return;
+
+  const storyId = viewer.user.story_id;
+
+  if (viewer.user.user_id !== me.id) {
+    alert("You can only delete your own story.");
+    return;
+  }
+
+  const ok = window.confirm("Are you sure you want to delete this story?");
+  if (!ok) return;
+
+  setDeletingStory(true);
+
+  try {
+    const { data: items, error: itemFetchError } = await supabase
+      .from("story_items")
+      .select("id, path")
+      .eq("story_id", storyId);
+
+    if (itemFetchError) throw itemFetchError;
+
+    const storagePaths = (items || [])
+      .map((item) => item.path)
+      .filter(Boolean);
+
+    if (storagePaths.length) {
+      const { error: storageError } = await supabase.storage
+        .from(STORY_BUCKET)
+        .remove(storagePaths);
+
+      if (storageError) {
+        console.warn("Storage delete warning:", storageError);
+      }
+    }
+
+    const { error: itemsDeleteError } = await supabase
+      .from("story_items")
+      .delete()
+      .eq("story_id", storyId);
+
+    if (itemsDeleteError) throw itemsDeleteError;
+
+    const { error: storyDeleteError } = await supabase
+      .from("stories")
+      .delete()
+      .eq("id", storyId)
+      .eq("user_id", me.id);
+
+    if (storyDeleteError) throw storyDeleteError;
+
+    setViewer(null);
+    setReloadKey((k) => k + 1);
+    setTimeout(updateNav, 120);
+  } catch (err) {
+    console.error("Story delete error:", err);
+    alert(err.message || "Failed to delete story.");
+  } finally {
+    setDeletingStory(false);
+  }
+};
   // ── auto-advance images ────────────────────────────────────────────────────
 
   useEffect(() => {
@@ -497,9 +568,46 @@ export default function StoriesBar({ me }) {
                   <div className="sv-header__time">Just now</div>
                 </div>
               </div>
-              <button className="sv-close" onClick={() => setViewer(null)} aria-label="Close">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" width="18" height="18"><path d="M18 6L6 18M6 6l12 12"/></svg>
-              </button>
+             <div className="sv-header__actions">
+  {viewer.user?.user_id === me.id && (
+    <button
+      className="sv-delete"
+      onClick={deleteMyStory}
+      disabled={deletingStory}
+      aria-label="Delete story"
+      title="Delete story"
+    >
+      {deletingStory ? (
+        <svg
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          strokeWidth="2.3"
+          width="18"
+          height="18"
+          style={{ animation: "sbSpin 1s linear infinite" }}
+        >
+          <circle cx="12" cy="12" r="9" strokeOpacity=".25" />
+          <path d="M12 3a9 9 0 0 1 9 9" strokeLinecap="round" />
+        </svg>
+      ) : (
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" width="18" height="18">
+          <path d="M3 6h18" />
+          <path d="M8 6V4h8v2" />
+          <path d="M19 6l-1 15H6L5 6" />
+          <path d="M10 11v6" />
+          <path d="M14 11v6" />
+        </svg>
+      )}
+    </button>
+  )}
+
+  <button className="sv-close" onClick={() => setViewer(null)} aria-label="Close">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" width="18" height="18">
+      <path d="M18 6L6 18M6 6l12 12"/>
+    </svg>
+  </button>
+</div>
             </div>
 
             {/* media */}
@@ -550,6 +658,39 @@ export default function StoriesBar({ me }) {
 
       <style>{`
         /* ── wrap & rail ── */
+        .sv-header__actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-shrink: 0;
+}
+
+.sv-delete {
+  width: 32px;
+  height: 32px;
+  border: none;
+  border-radius: 50%;
+  background: rgba(239, 68, 68, 0.85);
+  backdrop-filter: blur(6px);
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: background .15s, transform .15s;
+  flex-shrink: 0;
+}
+
+.sv-delete:hover {
+  background: rgba(220, 38, 38, 0.95);
+  transform: scale(1.04);
+}
+
+.sv-delete:disabled {
+  opacity: .65;
+  cursor: not-allowed;
+  transform: none;
+}
         .sb-wrap { width: 100%; overflow: hidden; }
         .sb-rail { position: relative; }
 

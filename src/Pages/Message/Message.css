@@ -100,9 +100,14 @@
     background: darkred;
   }
   
-  @media (max-width: 768px) {
+@media (max-width: 600px) {
     .contact-wrapper {
       grid-template-columns: 1fr;
     }
+    .messages-page {
+    --nav-h: 72px;
+    padding: 1rem 10px 0px ;
+}
   }
+  
   

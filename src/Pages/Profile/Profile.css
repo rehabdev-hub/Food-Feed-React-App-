@@ -132,6 +132,7 @@
     font-weight: 600;
     cursor: pointer;
     transition: 0.2s;
+        font-family: 'Poppins';
   }
   
   .profile-page .profile-tabs button.active,
@@ -652,4 +653,12 @@
 }
 span.pill.following {
     font-size: 12px;
+}
+@media (max-width:600px) {
+  .profile-page {
+    max-width: 100%;
+    margin: 1rem auto !important;
+    font-family: "Poppins", sans-serif;
+    padding-inline: 10px;
+}
 }
